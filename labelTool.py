@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-  
 # -------------------------------------------------------------------------------
-# Name:        COLLECTOR BRUSH DEEP-LEARNING DATA PRODUCTOR
+# Name:        COLLECTOR BRUSH DEEP-LEARNING DATA PRODUCT
 # Purpose:     LABEL BRUSH CONDITION
-# Author:      WangZhipeng
+# Author:      Wang Zhipeng
 # Created:     03/05/2017
 # -------------------------------------------------------------------------------
 from __future__ import division
@@ -36,10 +36,11 @@ class LabelTool():
     '''
 
     def __init__(self, master):
+        #类变量：
+        self.img = 0#图片
+        self.img_cv2 = 0#切割图片
         # 初始化界面
         # set up the main frame
-        self.img = 0
-        self.img_cv2 = 0
         self.parent = master
         self.parent.title("Collector Brush Img Lable Tool")
         self.frame = Frame(self.parent)
