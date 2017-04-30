@@ -10,7 +10,7 @@ print(avi_name_1)
 VideoCapture = cv2.VideoCapture(avi_name)
 fps = VideoCapture.get(cv2.CAP_PROP_FPS)
 size = (int(VideoCapture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(VideoCapture.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-videoWriter = cv2.VideoWriter(avi_name, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, size)
+# videoWriter = cv2.VideoWriter(avi_name, cv2.VideoWriter_fourcc('X', 'V', 'I', 'D'), fps, size)
 success, frame = VideoCapture.read()
 i = 0
 while success:
