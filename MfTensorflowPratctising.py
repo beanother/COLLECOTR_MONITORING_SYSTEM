@@ -55,6 +55,6 @@ with tf.Session() as sess:
             writer.add_summary(result, i)
 
 
-#activation_function = tf.nn.softmax()
-#tf.reduce_mean(-tf.reduce_sum(ys* tf.log(prodection),reduction_indices=[1]))
-#用来做分类效果比较好
+            # activation_function = tf.nn.softmax()
+            # tf.reduce_mean(-tf.reduce_sum(ys* tf.log(prodection),reduction_indices=[1]))
+            # 用来做分类效果比较好
