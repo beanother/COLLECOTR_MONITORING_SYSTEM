@@ -20,7 +20,6 @@ img = tf.decode_raw(features["img"], tf.uint8)
 label = tf.cast(features["label"], tf.int32)
 print("img: ", img)
 print("label: ", label)
-course_2_tf_nn.py
 init = tf.global_variables_initializer()
 
 with tf.Session() as sess:
