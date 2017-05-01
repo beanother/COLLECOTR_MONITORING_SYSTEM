@@ -26,7 +26,7 @@ def training_data_maker(file_name=None, path=None):
         class_path = cwd + os.sep + name + os.sep
         for img_name in os.listdir(class_path):
             img_path = class_path + img_name  # 每一个图片的路径
-
+            print(img_path)
             img = Image.open(img_path)
             img = img.resize((255, 255))
             img_raw = img.tobytes()  # 将图片转化为二进制格式
@@ -38,13 +38,10 @@ def training_data_maker(file_name=None, path=None):
 
     writer.close()
 
-training_data_maker(file_name="COLLECTOR_BRUSH")
-
-
 def training_data_reader(file_name=None, path=None):
     # read learning file
     if file_name is None:
-        file_name = "COLLECTOR_BRUSH.tfrecords"
+        file_name = "COLLECTOR_TRAIN.tfrecords"
     else:
         file_name = file_name
 
@@ -54,7 +51,7 @@ def training_data_reader(file_name=None, path=None):
         cwd = path
 
     print(cwd + os.sep + file_name)
-    fileNameQue = tf.train.string_input_producer(cwd + os.sep + file_name)
+    fileNameQue = tf.train.string_input_producer([cwd + os.sep + file_name])
     reader = tf.TFRecordReader()
     key, value = reader.read(fileNameQue)
     # 返回features
@@ -68,4 +65,6 @@ def training_data_reader(file_name=None, path=None):
     with tf.Session() as sess:
         sess.run(init)
 
+
+training_data_maker()
 training_data_reader()
