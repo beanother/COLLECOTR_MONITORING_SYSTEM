@@ -9,8 +9,10 @@ def add_layer(inputs, in_size, out_size, n_layer, activation_function=None):
     with tf.name_scope(layer_name):
         with tf.name_scope('Weights'):
             Weights = tf.Variable(tf.random_normal([in_size, out_size]), name="W")
+            tf.summary.histogram('Weights', Weights)
         with tf.name_scope('biases'):
             biases = tf.Variable(tf.zeros([1, out_size]) + 0.1, name='b')
+            tf.summary.histogram('biases', biases)
         with tf.name_scope('Wx_plus_b'):
             Wx_plus_b = tf.add(tf.matmul(inputs, Weights), biases, name='Wx_plus_b')
         if activation_function is None:
@@ -28,8 +30,8 @@ y_data = np.square(x_data) + 0.5 + noise
 
 # define placeholder for inputs to network
 with tf.name_scope('inputs'):
-    xs = tf.placeholder(tf.float32, [None, 1], name='x_data')
-    ys = tf.placeholder(tf.float32, [None, 1], name='y_data')
+    xs = tf.placeholder(tf.float32, [None, 1], name='x_input')
+    ys = tf.placeholder(tf.float32, [None, 1], name='y_input')
 # add hidden layer
 l1 = add_layer(xs, 1, 10, n_layer=1, activation_function=tf.nn.relu)
 # add output layer
@@ -37,6 +39,7 @@ prediction = add_layer(l1, 10, 1, n_layer=2, activation_function=None)
 # the error between prediction and real data
 with tf.name_scope('loss'):
     loss = tf.reduce_mean(tf.reduce_sum(tf.square(prediction - ys), reduction_indices=[1]), name='loss')
+    tf.summary.scalar('loss', loss)
 with tf.name_scope('train'):
     train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
