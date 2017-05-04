@@ -61,11 +61,12 @@ def training_data_reader(file_name=None, path=None):
                                                         'img_raw': tf.FixedLenFeature([], tf.string), })
 
     img = tf.decode_raw(features["img_raw"], tf.uint8)
-    img = tf.reshape(img, [255,255,3])
+    img = tf.reshape(img, [255, 255, 3])
     img = tf.cast(img, tf.float32) * (1. / 255) - 0.5
     label = tf.cast(features["label"], tf.int32)
 
     return img, label
+
 
 training_data_maker()
 
@@ -75,9 +76,23 @@ img_batch, label_batch = tf.train.shuffle_batch([img, label], batch_size=30,
                                                 min_after_dequeue=1000)
 init = tf.global_variables_initializer()
 
+saver = tf.train.Saver()
+
 with tf.Session() as sess:
     sess.run(init)
-    threads = tf.train.start_queue_runners(sess=sess)
-    for i in range(3):
-        val, l = sess.run([img_batch, label_batch])
-        print(val.shape, l)
+
+    # save train data
+    saver.save(sess, "./train_data/train_model.ckpt")
+
+
+"""
+# read train graph
+saver = tf.train.import_meta_graph("./train_data/train_model.ckpt.meta")
+with tf.Session as sess:
+    
+    # read train data
+    saver.restore(sess, "./train_data/train_model.ckpt")
+    # read train graph
+"""
+
+
