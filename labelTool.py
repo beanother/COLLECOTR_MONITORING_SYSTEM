@@ -6,13 +6,13 @@
 # Created:     03/05/2017
 # -------------------------------------------------------------------------------
 from __future__ import division
-from tkinter import *
-from PIL import Image, ImageTk
-import os
+
 import glob
+import os
+from tkinter import *
+
 import cv2
-import shutil
-import random
+from PIL import Image, ImageTk
 
 w0 = 1;  # 图片原始宽度
 h0 = 1;  # 图片原始高度
@@ -36,9 +36,9 @@ class LabelTool():
     '''
 
     def __init__(self, master):
-        #类变量：
-        self.img = 0#图片
-        self.img_cv2 = 0#切割图片
+        # 类变量：
+        self.img = 0  # 图片
+        self.img_cv2 = 0  # 切割图片
         # 初始化界面
         # set up the main frame
         self.parent = master
@@ -432,4 +432,3 @@ if __name__ == '__main__':
     root = Tk()
     tool = LabelTool(root)
     root.mainloop()
-
